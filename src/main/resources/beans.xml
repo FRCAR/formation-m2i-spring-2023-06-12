@@ -10,8 +10,12 @@
     http://www.springframework.org/schema/context/spring-context.xsd 
     http://www.springframework.org/schema/mvc 
     http://www.springframework.org/schema/mvc/spring-mvc.xsd">
-
+    
+    <bean id="monPremierBeanSpring" class="com.bigcorp.booking.bean.Child" >
+    	<constructor-arg  value="gabriel"></constructor-arg>
+    	<property name="toy" ref="jouet" />
+    </bean>
+    
+    <bean id="jouet" class="com.bigcorp.booking.bean.Toy" />
 	
-	<bean id="child" class="com.bigcorp.booking.bean.Child" />
-		
 </beans>

@@ -11,11 +11,12 @@
     http://www.springframework.org/schema/mvc 
     http://www.springframework.org/schema/mvc/spring-mvc.xsd">
     
-    <bean id="monPremierBeanSpring" class="com.bigcorp.booking.bean.Child" >
-    	<constructor-arg  value="gabriel"></constructor-arg>
-    	<property name="toy" ref="jouet" />
+    <bean id="bookingService" class="com.bigcorp.booking.correction.service.BookingService" >
+    	<property name="flightService" ref="flightService" />
     </bean>
     
-    <bean id="jouet" class="com.bigcorp.booking.bean.Toy" />
-   
+    <bean id="planeService" class="com.bigcorp.booking.correction.service.PlaneService" />
+	
+    <bean id="flightService" class="com.bigcorp.booking.correction.service.FlightService" />
+	
 </beans>

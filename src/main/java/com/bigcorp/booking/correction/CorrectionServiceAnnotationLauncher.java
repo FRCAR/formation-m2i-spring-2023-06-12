@@ -5,6 +5,9 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import com.bigcorp.booking.correction.configuration.TpServiceConfiguration;
 import com.bigcorp.booking.correction.service.BookingService;
 import com.bigcorp.booking.correction.service.FlightService;
+import com.bigcorp.booking.correction.service.HyperBean;
+import com.bigcorp.booking.correction.service.PlaneService;
+import com.bigcorp.booking.correction.service.SuperBean;
 
 
 public class CorrectionServiceAnnotationLauncher {
@@ -23,6 +26,19 @@ public class CorrectionServiceAnnotationLauncher {
 			
 			BookingService bookingService = appContext.getBean(BookingService.class);
 			bookingService.getFlightService().sayHello();
+			
+			SuperBean superBean = appContext.getBean(SuperBean.class);
+			System.out.println("superBean != null ? " + (superBean != null));
+			
+			System.out.println("bookingService.getHyperBean() != null ? " 
+					+ (bookingService.getHyperBean() != null));
+			
+			
+			System.out.println("Max plane : " + appContext.getBean(PlaneService.class).getMaxPlane());
+			
+			
+			System.out.println("Le bean de type : HyperBean dans le contexte est : " 
+					+ appContext.getBean(HyperBean.class).getName());
 			
 		}
 	}

@@ -8,6 +8,9 @@ public class BookingService {
 	
 	@Autowired
 	private FlightService flightService;
+	
+	@Autowired
+	private HyperBean hyperBean;
 
 	public FlightService getFlightService() {
 		return flightService;
@@ -16,5 +19,11 @@ public class BookingService {
 	public void setFlightService(FlightService flightService) {
 		this.flightService = flightService;
 	}
+
+	public HyperBean getHyperBean() {
+		return hyperBean;
+	}
+
+	
 
 }

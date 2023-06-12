@@ -2,22 +2,23 @@ package com.bigcorp.booking.correction;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.bigcorp.booking.correction.configuration.TpServiceConfiguration;
 import com.bigcorp.booking.correction.service.BookingService;
 import com.bigcorp.booking.correction.service.FlightService;
 
 
-public class CorrectionServiceAnnotationLauncher {
+public class CorrectionServiceAnnotationScanLauncher {
 
 	public static void main(String[] args) {
 
 		// Instanciation du contexte Spring 
 		try(AnnotationConfigApplicationContext appContext
 				= new AnnotationConfigApplicationContext()){
-			
-			appContext.register(TpServiceConfiguration.class);
+
+			//Scan du contexte 
+			appContext.scan("com.bigcorp.booking.correction");
 			appContext.refresh();
 			
+			// Récupération du bean child du contexte 
 			FlightService flightService = appContext.getBean(FlightService.class);
 			flightService.sayHello();
 			

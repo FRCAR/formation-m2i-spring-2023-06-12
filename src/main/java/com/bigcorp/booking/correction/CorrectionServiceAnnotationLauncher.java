@@ -33,12 +33,8 @@ public class CorrectionServiceAnnotationLauncher {
 
 			System.out.println("Max plane : " + appContext.getBean(PlaneService.class).getMaxPlane());
 
-			try {
-				System.out.println("Le bean de type : HyperBean dans le contexte est : "
-						+ appContext.getBean(HyperBean.class).getName());
-			} catch (Exception e) {
-				System.out.println("Non mais en fait ça va.");
-			}
+			System.out.println("Le bean de type : HyperBean dans le contexte est : "
+					+ appContext.getBean(HyperBean.class).getName());
 
 		}
 	}

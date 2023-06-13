@@ -15,7 +15,7 @@ public class SpringJdbcTemplateConfiguration {
     public DataSource myH2DataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.h2.Driver");
-        dataSource.setUrl("jdbc:h2:file:~/h2-data/formation-spring-jdbc-template");
+        dataSource.setUrl("jdbc:h2:file:~/h2-data/formation-spring-2023-06");
         dataSource.setUsername("test");
         dataSource.setPassword("test");
 

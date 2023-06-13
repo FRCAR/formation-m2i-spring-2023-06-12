@@ -1,16 +1,26 @@
 package com.bigcorp.booking.correction.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Plane {
 
-	private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
 	private String name;
-
-	public Integer getId() {
+	
+	private String model;
+	
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -21,5 +31,15 @@ public class Plane {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public String getModel() {
+		return model;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+	
+	
 
 }

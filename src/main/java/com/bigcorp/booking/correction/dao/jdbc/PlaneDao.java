@@ -1,4 +1,4 @@
-package com.bigcorp.booking.correction.dao;
+package com.bigcorp.booking.correction.dao.jdbc;
 
 import java.util.HashMap;
 import java.util.List;

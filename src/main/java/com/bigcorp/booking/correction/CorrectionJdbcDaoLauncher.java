@@ -3,10 +3,10 @@ package com.bigcorp.booking.correction;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.bigcorp.booking.correction.configuration.TpServiceConfiguration;
-import com.bigcorp.booking.correction.dao.PlaneDao;
+import com.bigcorp.booking.correction.dao.jdbc.PlaneDao;
 import com.bigcorp.booking.correction.model.Plane;
 
-public class CorrectionDaoLauncher {
+public class CorrectionJdbcDaoLauncher {
 
 	public static void main(String[] args) {
 

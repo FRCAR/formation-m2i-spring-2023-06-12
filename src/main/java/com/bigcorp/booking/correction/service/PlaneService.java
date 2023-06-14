@@ -42,9 +42,12 @@ public class PlaneService {
 		return planeDao.save(plane);
 	}
 	
-	@Transactional
-	public void findById(Long id) {
-		planeDao.findById(id);
+	public Plane findById(Long id) {
+		return planeDao.findById(id).orElse(null);
+	}
+
+	public Iterable<Plane> findAll() {
+		return planeDao.findAll();
 	}
 	
 }

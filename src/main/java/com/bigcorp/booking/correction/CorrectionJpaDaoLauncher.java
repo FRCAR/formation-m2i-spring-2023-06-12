@@ -6,8 +6,10 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import com.bigcorp.booking.correction.configuration.TpServiceConfiguration;
 import com.bigcorp.booking.correction.model.Flight;
+import com.bigcorp.booking.correction.model.Plane;
 import com.bigcorp.booking.correction.service.BookingService;
 import com.bigcorp.booking.correction.service.FlightService;
+import com.bigcorp.booking.correction.service.PlaneService;
 
 public class CorrectionJpaDaoLauncher {
 
@@ -47,6 +49,18 @@ public class CorrectionJpaDaoLauncher {
 			
 			System.out.println("Bookings après " +  threeHoursAfterDeparture + " :");
 			bookingService.findByFlightDepartureAfter(threeHoursAfterDeparture).forEach(System.out::println);
+			
+			
+			PlaneService planeService = appContext.getBean(PlaneService.class);
+			Plane plane = new Plane();
+			plane.setModel("Airbus A350");
+			plane.setName("A350-001");
+			planeService.save(plane);
+
+			Plane plane2 = new Plane();
+			plane2.setModel("Airbus A350");
+			plane2.setName("A350-002");
+			planeService.save(plane2);
 		}
 	}
 

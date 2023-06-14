@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Liste d'avions !</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+ <h1>Salut les gens</h1>
+ 
+ <ul>
+  <li th:each="plane : ${planes}">
+     <a href="plane?id=3" th:href="@{/plane-detail(id=${plane.id})}">Lien vers l'avion
+      <p th:text="${plane.name}"></p> </a>
+  </li>
+ </ul>
+
+</body>
+</html>

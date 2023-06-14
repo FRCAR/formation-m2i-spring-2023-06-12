@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,7 +12,11 @@ import com.bigcorp.booking.correction.dao.jpa.BookingDao;
 import com.bigcorp.booking.correction.model.Booking;
 import com.bigcorp.booking.correction.model.Flight;
 
-@Component
+/**
+ * Classe de service (annotée avec @Service, mais @Component ferait tout 
+ * aussi bien l'affaire. Permet de gérer les entités Booking.
+ */
+@Service
 public class BookingService {
 
 	@Autowired
@@ -62,5 +66,28 @@ public class BookingService {
 		bookingDao.save(booking);
 		return booking;
 	}
+	
+	@Transactional
+	public void deleteById(Long id) {
+		bookingDao.deleteById(id);
+	}
+	
+	/**
+	 * Sauvegarde booking. Renvoie 
+	 * un Booking qu'il vaut mieux utiliser pour la suite : 
+	 * la persistence peut avoir changé l'objet
+	 * @param booking
+	 * @return
+	 */
+	@Transactional
+	public Booking save(Booking booking) {
+		return bookingDao.save(booking);
+	}
+	
+	@Transactional
+	public void findById(Long id) {
+		bookingDao.findById(id);
+	}
+	
 	
 }

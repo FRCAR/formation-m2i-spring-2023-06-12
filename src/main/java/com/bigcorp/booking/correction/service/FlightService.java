@@ -18,8 +18,25 @@ public class FlightService {
 	}
 	
 	@Transactional
-	public void save(Flight flight) {
-		flightDao.save(flight);
+	public void deleteById(Long id) {
+		flightDao.deleteById(id);
+	}
+	
+	/**
+	 * Sauvegarde flight. Renvoie 
+	 * un Flight qu'il vaut mieux utiliser pour la suite : 
+	 * la persistence peut avoir changé l'objet
+	 * @param flight
+	 * @return
+	 */
+	@Transactional
+	public Flight save(Flight flight) {
+		return flightDao.save(flight);
+	}
+	
+	@Transactional
+	public void findById(Long id) {
+		flightDao.findById(id);
 	}
 
 }

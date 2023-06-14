@@ -19,7 +19,7 @@ public interface BookingDao extends CrudRepository<Booking, Long>{
 	//Récupérer les réservations (Booking) par lastName.
 	List<Booking> findByLastName(String lastName);
 	
-	//Récupérer les réservations par  firstName et lastName
+	//Récupérer les réservations par  firstName et lastName (en ignorant la casse pour lastName)
 	List<Booking> findByFirstNameAndLastNameIgnoreCase(String firstName, String lastName);
 	
 	//Récupérer les réservations par  firstName et lastName sans tenir compte de la casse

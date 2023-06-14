@@ -1,2 +1,28 @@
-Salut les gens. 
-La pire page HTML du monde.
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Ma première page Thymeleaf !</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+ <h1>Salut les gens</h1>
+ <div th:if="${camionDynamique != null}">
+  <p th:text="${camionDynamique.id}">L'id du camion est ici</p>
+  <p th:text="${camionDynamique.nom}">Le nom du camion est ici</p>
+ </div>
+
+ <ul>
+  <li th:each="camion : ${camions}" th:text="${camion.nom}">Camion</li>
+ </ul>
+
+ <!-- Produit '/mon-contexte/order/details?orderId=3'  -->
+ <a href="camion?camionId=3" th:href="@{/camion(camionId=${camion.id})}">vue</a>
+
+ <!-- Produit '/mon-contexte/order/3/details' -->
+ <a href="camion/3" th:href="@{/camion/{camionId}(camionId=${camion.id})}">vue</a>
+
+</body>
+</html>

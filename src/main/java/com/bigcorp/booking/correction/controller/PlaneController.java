@@ -3,6 +3,7 @@ package com.bigcorp.booking.correction.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,16 +31,18 @@ public class PlaneController {
 	}
 
 	@PostMapping("/plane-detail")
-	public ModelAndView processSubmit(@ModelAttribute("plane") Plane plane, BindingResult result) {
-		ModelAndView mav = new ModelAndView("plane-detail");
-		mav.addObject("plane", plane);
+	public ModelAndView processSubmit(@Validated @ModelAttribute("plane") Plane plane, BindingResult result) {
+		ModelAndView mavError = new ModelAndView("plane-detail");
+		mavError.addObject("plane", plane);
 		if (result.hasErrors()) {
-			return mav;
+			System.out.println("Erreur : l'avion n'a pas été sauvegardé");
+			return mavError;
 		}
 		// else
+		ModelAndView mavOk = new ModelAndView("redirect:/plane-detail?id=" + plane.getId());
 		Plane savedPlane = planeService.save(plane);
-		mav.addObject("plane", savedPlane);
-		return mav;
+		mavOk.addObject("plane", savedPlane);
+		return mavOk;
 	}
 
 }

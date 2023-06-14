@@ -5,6 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import jakarta.validation.constraints.Size;
+
 @Entity
 public class Plane {
 
@@ -12,6 +14,7 @@ public class Plane {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Size(min=3, max=54)
 	private String name;
 	
 	private String model;

@@ -1,7 +1,10 @@
 package com.bigcorp.booking.correction.controller;
 
+import jakarta.validation.constraints.NotNull;
+
 public class Camion {
 	
+	@NotNull
 	private Integer id;
 	private String nom;
 	

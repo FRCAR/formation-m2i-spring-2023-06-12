@@ -9,7 +9,8 @@
 
 <body>
  <div th:if="${plane != null}">
-  <form action="planete" th:action="@{/plane-detail}" method="post">
+  <form action="plane" th:object="${plane}" th:action="@{/plane-detail}"
+   method="post">
    <p>Id :</p>
    <p>
     <input type="text" name="id" th:value="${plane.id}" />
@@ -17,12 +18,18 @@
    <p>Nom :</p>
    <p>
     <input type="text" name="name" th:value="${plane.name}" />
+   <p class="err" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Erreur
+    d'id</p>
    </p>
    <p>Modèle :</p>
    <p>
     <input type="text" name="model" th:value="${plane.model}" />
    </p>
    <input type="submit" value="Sauvegarder" />
+   <ul th:if="${#fields.hasErrors('*')}">
+    <li th:each="err : ${#fields.detailedErrors()}"
+     th:text="${err.fieldName + '-' + err.message}">Erreur</li>
+   </ul>
   </form>
  </div>
 

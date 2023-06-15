@@ -29,7 +29,7 @@ public class RestTemplateMainClient {
 		  = "http://localhost:8080/sprg-frw/rest/v1/planes/" + id;
 		ResponseEntity<Plane> response
 		  = restTemplate.getForEntity(url, Plane.class);
-		return response.getBody().getName();
+		return response.getBody().getName();	
 	}
 	
 	/**

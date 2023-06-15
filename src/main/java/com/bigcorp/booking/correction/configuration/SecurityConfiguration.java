@@ -1,20 +1,23 @@
-package com.bigcorp.booking.tp.configuration;
+package com.bigcorp.booking.correction.configuration;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
-/*@Configuration
+@Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(
         prePostEnabled = true,  // Enables @PreAuthorize and @PostAuthorize
         securedEnabled = true, // Enables @Secured 
         jsr250Enabled = true    // Enables @RolesAllowed (Ensures JSR-250 annotations are enabled)
- )*/
+ )
 public class SecurityConfiguration {
 
 	@Bean
@@ -23,10 +26,10 @@ public class SecurityConfiguration {
 		http
 				.authorizeHttpRequests(requests -> requests
 						// / et /home peuvent être requêtées par tout le monde
-						.requestMatchers("/", "/home", "/logout").permitAll()
+						.requestMatchers("/", "/home", "/planes").permitAll()
 						// Toute autre requête ne peut être émise que par une personne
 						// authentifiée
-						//.requestMatchers("/rest/v1/**").permitAll()
+						.requestMatchers("/ws").authenticated()
 						.anyRequest().authenticated())
 				// la page de login est accessible via /login
 				// et est accessible par tout le monde
@@ -35,7 +38,7 @@ public class SecurityConfiguration {
 						.permitAll())
 				// La page de logout est aussi accessible
 				// par tout le monde
-				.logout(logout -> logout.permitAll());
+				.logout(logout -> logout.logoutUrl("/logout").permitAll());
 		return http.build();
 	}
 

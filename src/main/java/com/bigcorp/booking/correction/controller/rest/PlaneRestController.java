@@ -9,10 +9,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.bigcorp.booking.correction.model.Plane;
 import com.bigcorp.booking.correction.service.PlaneService;
+
+import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("/rest/v1/planes")
@@ -28,6 +31,15 @@ public class PlaneRestController {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No plane found");
 		}
 		return plane;
+	}
+	
+	@GetMapping(path="/reflect/{id}")
+	public Mono<Plane> getByIdAsync(@PathVariable("id") Long id) {
+		WebClient client = WebClient.builder()
+				.baseUrl("http://localhost:8080/sprg-frw/rest/v1/")
+				.build();
+		return client.get().uri("/planes/" + id).retrieve()
+					.bodyToMono(Plane.class);
 	}
 	
 	@PostMapping

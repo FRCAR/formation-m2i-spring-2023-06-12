@@ -18,7 +18,7 @@
 	</servlet-mapping>
 
 	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
+		<welcome-file>/planes</welcome-file>
 	</welcome-file-list>
 
 	<session-config>

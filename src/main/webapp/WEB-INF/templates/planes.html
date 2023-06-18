@@ -10,6 +10,9 @@
 <body>
  <h1>Salut les gens</h1>
  
+ Utilisateur connecté : <span sec:authentication="name">Jean-Michel</span>
+GrantedAuthorities : <span  sec:authentication="principal.authorities">[READ_INVOICE, DELETE_USER]</span>
+ 
  <ul>
   <li th:each="plane : ${planes}">
      <a href="plane?id=3" th:href="@{/plane-detail(id=${plane.id})}">Lien vers l'avion

@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -26,7 +27,8 @@ public class SecurityConfiguration {
 		http
 				.authorizeHttpRequests(requests -> requests
 						// / et /home peuvent être requêtées par tout le monde
-						.requestMatchers("/", "/home", "/planes").permitAll()
+						.requestMatchers("/", "/home").permitAll()
+						.requestMatchers("/planes").hasAuthority("MANAGE_PLANE")
 						// Toute autre requête ne peut être émise que par une personne
 						// authentifiée
 						.requestMatchers("/ws").authenticated()
@@ -38,25 +40,31 @@ public class SecurityConfiguration {
 						.permitAll())
 				// La page de logout est aussi accessible
 				// par tout le monde
-				.logout(logout -> logout.logoutUrl("/logout").permitAll());
+				.logout(logout -> logout.logoutUrl("/logout")
+						.logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET")).permitAll());
 		return http.build();
 	}
 
 	@Bean
+	@SuppressWarnings("deprecation")
 	public UserDetailsService userDetailsService() {
 		// La méthode ci-dessous est dépréciée : il n'est pas conseillé
 		// de mettre en dur un login et un mot de passe, mais de
 		// récupérer un utilisateur d'une base de données, ou d'un
 		// référentiel d'utilisateurs (annuaire LDAP)
-		@SuppressWarnings("deprecation")
 		UserDetails user = User.withDefaultPasswordEncoder()
 				.username("user")
 				.password("password")
-				.authorities("USER")
+				.authorities("USER", "MANAGE_PLANE")
+				.build();
+		UserDetails user2 = User.withDefaultPasswordEncoder()
+				.username("roberto")
+				.password("password")
+				.authorities("USER", "SUPER_ADMIN")
 				.build();
 		// Renvoie une implémentation de UserDetailsService
 		// qui stocke les utilisateurs en mémoire (ici, un seul utilisateur)
-		return new InMemoryUserDetailsManager(user);
+		return new InMemoryUserDetailsManager(user, user2);
 	}
 
 }

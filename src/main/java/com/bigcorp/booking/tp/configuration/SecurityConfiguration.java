@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /*@Configuration
 @EnableWebSecurity
@@ -23,7 +24,7 @@ public class SecurityConfiguration {
 		http
 				.authorizeHttpRequests(requests -> requests
 						// / et /home peuvent être requêtées par tout le monde
-						.requestMatchers("/", "/home", "/logout").permitAll()
+						.requestMatchers("/", "/home").permitAll()
 						// Toute autre requête ne peut être émise que par une personne
 						// authentifiée
 						//.requestMatchers("/rest/v1/**").permitAll()
@@ -35,7 +36,8 @@ public class SecurityConfiguration {
 						.permitAll())
 				// La page de logout est aussi accessible
 				// par tout le monde
-				.logout(logout -> logout.permitAll());
+				.logout(logout -> logout.logoutUrl("/logout")
+				.logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET")).permitAll());
 		return http.build();
 	}
 
